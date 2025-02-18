@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Todo } from './domain/todo/todo.entity';
-import { TodoModule } from './infrastructure/repositories/todo/todo.module';
+import { Contacto } from './domain/contacto/contacto.entity';
+import { ContactoModule } from './infrastructure/repositories/contacto/contacto.module';
 
 @Module({
   imports: [
@@ -12,10 +12,10 @@ import { TodoModule } from './infrastructure/repositories/todo/todo.module';
       username: 'postgres',
       password: '1234',
       database: 'postgres',
-      entities: [Todo],
+      entities: [Contacto],
       synchronize: true,
     }),
-    TodoModule,
+    ContactoModule,
   ],
   controllers: [],
   providers: [],

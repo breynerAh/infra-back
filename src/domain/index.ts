@@ -1,3 +1,3 @@
-import { Todo } from './todo/todo.entity';
+import { Contacto } from './contacto/contacto.entity';
 
-export const DOMAIN_ENTITIES = [Todo];
+export const DOMAIN_ENTITIES = [Contacto];

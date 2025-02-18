@@ -1,22 +1,23 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Todo } from 'src/domain/todo/todo.entity';
+import { Contacto } from 'src/domain/contacto/contacto.entity';
 import {
   DeepPartial,
   FindManyOptions,
+  FindOneOptions,
   InsertResult,
   Repository,
 } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 @Injectable()
-export class TodoRepository {
+export class ContactoRepository {
   constructor(
-    @InjectRepository(Todo)
-    private readonly repository: Repository<Todo>,
+    @InjectRepository(Contacto)
+    private readonly repository: Repository<Contacto>,
   ) {}
 
-  async findAll(options?: FindManyOptions<Todo>): Promise<Todo[]> {
+  async findAll(options?: FindManyOptions<Contacto>): Promise<Contacto[]> {
     try {
       return await this.repository.find(options);
     } catch (error) {
@@ -25,16 +26,25 @@ export class TodoRepository {
     }
   }
 
-  async create(request: DeepPartial<Todo>): Promise<Todo> {
+  async findOne(options: FindOneOptions<Contacto>): Promise<Contacto | null> {
+    try {
+      return await this.repository.findOne(options);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Error';
+      throw new HttpException(errorMessage, 500);
+    }
+  }
+
+  async create(request: DeepPartial<Contacto>): Promise<Contacto> {
     try {
       const result: InsertResult = await this.repository.insert(request);
-      const newTodo = await this.repository.findOne({
+      const newContacto = await this.repository.findOne({
         where: { id: result.identifiers[0].id as number },
       });
-      if (!newTodo) {
+      if (!newContacto) {
         throw new HttpException('No se pudo recuperar el registro', 500);
       }
-      return newTodo;
+      return newContacto;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Error';
       throw new HttpException(errorMessage, 500);
@@ -43,18 +53,18 @@ export class TodoRepository {
 
   async update(
     id: number,
-    request: QueryDeepPartialEntity<Todo>,
-  ): Promise<Todo> {
+    request: QueryDeepPartialEntity<Contacto>,
+  ): Promise<Contacto> {
     try {
       await this.repository.update(id, request);
-      const updatedTodo = await this.repository.findOne({ where: { id } });
-      if (!updatedTodo) {
+      const updatedContacto = await this.repository.findOne({ where: { id } });
+      if (!updatedContacto) {
         throw new HttpException(
           'No se pudo recuperar el registro actualizado',
           500,
         );
       }
-      return updatedTodo;
+      return updatedContacto;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Error';
       throw new HttpException(errorMessage, 500);
@@ -63,8 +73,8 @@ export class TodoRepository {
 
   async remove(id: number): Promise<string> {
     try {
-      const deleteTodo = await this.repository.findOne({ where: { id } });
-      if (!deleteTodo) {
+      const deleteContacto = await this.repository.findOne({ where: { id } });
+      if (!deleteContacto) {
         throw new HttpException('No se pudo recuperar el registro', 500);
       }
       await this.repository.delete(id);
@@ -75,14 +85,14 @@ export class TodoRepository {
     }
   }
 
-  async delete(id: number): Promise<Todo> {
+  async delete(id: number): Promise<Contacto> {
     try {
-      const deleteTodo = await this.repository.findOne({ where: { id } });
-      if (!deleteTodo) {
+      const deleteContacto = await this.repository.findOne({ where: { id } });
+      if (!deleteContacto) {
         throw new HttpException('No se pudo recuperar el registro', 500);
       }
       await this.repository.softDelete(id);
-      return deleteTodo;
+      return deleteContacto;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Error';
       throw new HttpException(errorMessage, 500);

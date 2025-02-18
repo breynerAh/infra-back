@@ -1,3 +1,3 @@
-import { TodoController } from './todo/todo.controller';
+import { ContactoController } from './contacto/contacto.controller';
 
-export const PRESENTATION_CONTROLLER = [TodoController];
+export const PRESENTATION_CONTROLLER = [ContactoController];

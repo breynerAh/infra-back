@@ -1,12 +1,19 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
-export class TodoRequest {
+export class ContactoRequest {
   /**
-   * name
+   * nombre
    */
   @IsString()
   @IsNotEmpty()
-  name: string;
+  nombre: string;
+
+  /**
+   * telefono
+   */
+  @IsString()
+  @IsNotEmpty()
+  telefono: string;
 
   /**
    * email

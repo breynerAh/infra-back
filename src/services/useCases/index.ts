@@ -1,11 +1,13 @@
-import { CreateTodoService } from './todo/createTodo.service';
-import { DeleteTodoService } from './todo/deleteTodo.service';
-import { GetAllTodoService } from './todo/getAllTodo.service';
-import { UpdateTodoService } from './todo/updateTodo.service';
+import { CreateContactoService } from './contacto/createContacto.service';
+import { DeleteContactoService } from './contacto/deleteContacto.service';
+import { GetAllContactoService } from './contacto/getAllContacto.service';
+import { GetOneContactoService } from './contacto/getOneContacto.service';
+import { UpdateContactoService } from './contacto/updateContacto.service';
 
 export const SERVICES_USE_CASES = [
-  GetAllTodoService,
-  CreateTodoService,
-  UpdateTodoService,
-  DeleteTodoService,
+  GetAllContactoService,
+  CreateContactoService,
+  UpdateContactoService,
+  DeleteContactoService,
+  GetOneContactoService,
 ];

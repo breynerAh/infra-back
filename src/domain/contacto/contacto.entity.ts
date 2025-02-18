@@ -8,9 +8,9 @@ import {
 } from 'typeorm';
 
 @Entity({
-  name: 'todo',
+  name: 'contactos',
 })
-export class Todo {
+export class Contacto {
   /**
    * id
    */
@@ -18,10 +18,16 @@ export class Todo {
   id: number;
 
   /**
-   * name
+   * nombre
    */
   @Column({ type: 'varchar', nullable: false })
-  name: string;
+  nombre: string;
+
+  /**
+   * telefono
+   */
+  @Column({ type: 'varchar', nullable: false, length: 10 })
+  telefono: string;
 
   /**
    * email

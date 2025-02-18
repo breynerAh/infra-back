@@ -1,12 +1,19 @@
 import { IsEmail, IsOptional, IsString } from 'class-validator';
 
-export class TodoUpdateRequest {
+export class ContactoUpdateRequest {
   /**
-   * name
+   * nombre
    */
   @IsString()
   @IsOptional()
-  name: string;
+  nombre: string;
+
+  /**
+   * telefono
+   */
+  @IsString()
+  @IsOptional()
+  telefono: string;
 
   /**
    * email
